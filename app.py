@@ -24,7 +24,6 @@ def index():
     if form.validate_on_submit():
         name = form.name.data
         send_email(name)
-        flash('E-mail enviado para os destinatários.', 'success')
         return redirect(url_for('index'))
 
     return render_template('index.html', form=form)
@@ -35,8 +34,8 @@ def send_email(name):
     data = {
         "from": f"Flask App <no-reply@{MAILGUN_DOMAIN}>",
         "to": MAILGUN_RECIPIENTS,
-        "subject": "Novo usuário adicionado",
-        "text": f"Um novo usuário foi adicionado: {name}"
+        "subject": "New User Added",
+        "text": f"A new user was added: {name}"
     }
 
     response = requests.post(
